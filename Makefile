@@ -11,7 +11,7 @@ composer-install:
 	if [ ! -d "vendor" ]; then docker run --rm --interactive --tty --volume ${PWD}:/app composer install; fi
 
 cp-env:
-	if [ ! -f ".env" ]; then cp .env.example .env && docker-compose exec php-cli php artisan key:generate; fi
+	if [ ! -f ".env" ]; then cp .env.example .env && php artisan key:generate; fi
 
 init:
 	if [ ! -d "vendor" ] || [ ! -f ".env" ]; then \

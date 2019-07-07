@@ -1,1 +1,1 @@
-# laravel-slot-machine
+# slot-machine
