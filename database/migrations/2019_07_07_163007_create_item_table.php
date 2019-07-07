@@ -14,7 +14,7 @@ class CreateItemTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             $table->enum('type', ['BALANCE', 'BONUS', 'ITEM']);
             $table->double('cost')->nullable();

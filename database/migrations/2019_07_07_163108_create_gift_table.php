@@ -14,7 +14,7 @@ class CreateGiftTable extends Migration
     public function up()
     {
         Schema::create('gifts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('min_count')->default(1);
             $table->integer('max_count')->default(1);
             $table->string('comment')->nullable();

@@ -14,7 +14,7 @@ class CreateItemGiftTable extends Migration
     public function up()
     {
         Schema::create('item_gift', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('gift_id');
             $table->timestamps();

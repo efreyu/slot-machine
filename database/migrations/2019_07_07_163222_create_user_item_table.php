@@ -14,7 +14,7 @@ class CreateUserItemTable extends Migration
     public function up()
     {
         Schema::create('user_items', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('item_id');
             $table->boolean('is_sent')->default(false);
