@@ -16,7 +16,7 @@ class CreateItemTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->enum('type', ['BALANCE', 'BONUS', 'ITEM']);
+            $table->enum('type', ['Balance', 'Bonus', 'Item']);
             $table->double('cost')->nullable();
             $table->timestamps();
         });

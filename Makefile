@@ -14,14 +14,24 @@ cp-env:
 	if [ ! -f ".env" ]; then cp .env.example .env && php artisan key:generate; fi
 
 init:
-	if [ ! -d "vendor" ] || [ ! -f ".env" ]; then \
-	make docker-build; \
+	if [ ! -d "vendor" ] || [ ! -f ".env" ] || [ -f Makefile.lock ]; then \
+	if [ ! -f ".env" ]; then \
+	make docker-build && make composer-install && make cp-env \
+	&& touch Makefile.lock \
+	&& echo -e "\e[1;97;45mRun this command again."; \
 	else \
-	make docker-up; \
+	rm Makefile.lock \
+	&& make docker-build && sleep 5 && make migrate && make seed && make open; \
+	fi \
+	else \
+	make docker-up && make open; \
 	fi
 
 migrate:
 	docker-compose exec php-cli php artisan migrate
+
+seed:
+	docker-compose exec php-cli php artisan db:seed
 
 test:
 	docker-compose exec php-cli vendor/bin/phpunit
@@ -35,6 +45,6 @@ perm:
 open:
 	echo -e "\e[1;97;44mAll done! Now you can visit - https://localhost:8080/"
 
-up: init composer-install cp-env migrate open
+up: init
 
 down: docker-down
